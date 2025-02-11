@@ -1,6 +1,4 @@
-
-import pytz
-import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 from dateutil.parser import parse
 from betdaq.enums import ErrorMap
@@ -36,11 +34,13 @@ def parse_time_str(time_str):
 def make_tz_naive(date):
     if isinstance(date, str):
         try:
-            date = parse_time_str(date).strftime('%Y-%m-%d %H:%M:%S.%f')
-        except:
+            date = parse_time_str(date)
+        except Exception:
             pass
-    if isinstance(date, datetime.datetime):
-        date = date.astimezone(pytz.UTC).replace(tzinfo=None).strftime('%Y-%m-%d %H:%M:%S.%f')
+    if isinstance(date, datetime):
+        if date.tzinfo is not None:
+            date = date.astimezone(timezone.utc).replace(tzinfo=None)
+        return date.strftime('%Y-%m-%d %H:%M:%S.%f')
     return date
 
 
