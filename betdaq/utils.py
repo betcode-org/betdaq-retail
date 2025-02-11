@@ -35,6 +35,7 @@ def make_tz_naive(date):
     if isinstance(date, str):
         try:
             date = parse_time_str(date)
+            return date.strftime('%Y-%m-%d %H:%M:%S.%f')
         except Exception:
             pass
     if isinstance(date, datetime):
