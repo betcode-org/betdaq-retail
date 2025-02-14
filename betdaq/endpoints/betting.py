@@ -29,13 +29,16 @@ class Betting(BaseEndpoint):
         :param wantSettledOrdersOnUnsettledMarkets: Flag indicating whether or not information about settled orders 
                                                     on unsettled markets should be returned.
         :type wantSettledOrdersOnUnsettledMarkets: bool
-        :return: orders that have changed.
+        :return: orders that have changed and maximum_sequence_number
         """
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('ListBootstrapOrders', params, secure=True)
         data = self.process_response(response, date_time_sent, 'Orders')
-        return [parse_orders(order) for order in data.get('data', {}).get('Order', [])] if data.get('data') else []
+        return {
+            "orders": [parse_orders(order) for order in data.get('data', {}).get('Order', [])] if data.get('data') else [],
+            "maximum_sequence_number": data["_data"].get("MaximumSequenceNumber", 0),
+        }
 
     def get_orders_diff(self, SequenceNumber):
         """

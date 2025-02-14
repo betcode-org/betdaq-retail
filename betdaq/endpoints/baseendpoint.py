@@ -49,4 +49,5 @@ class BaseEndpoint(object):
             'data': response.get(result_target, []) if result_target else response,
             'date_time_sent': date_time_sent,
             'date_time_received': date_time_received,
+            '_data': response,
         }
