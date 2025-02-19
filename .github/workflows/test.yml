@@ -40,7 +40,7 @@ jobs:
         coverage report
 
   deploy:
-    needs: [test, test-speed]
+    needs: test
     runs-on: ubuntu-latest
     environment:
       name: deploy
