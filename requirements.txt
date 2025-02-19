@@ -3,7 +3,7 @@ python-dateutil>=2.6.0
 zeep>=4.0.0
 
 # Tests & Linting
-black==24.8.0
+black==25.1.0
 coverage
 
 # Packaging
