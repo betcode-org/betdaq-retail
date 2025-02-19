@@ -8,11 +8,11 @@ class BaseClientTest(unittest.TestCase):
 
     def test_baseclient_init(self):
         client = BaseClient(
-            username="username", password="password", wsdl_file="resources/API.wsdl"
+            username="username", password="password", wsdl_file="tests/resources/API.wsdl"
         )
         assert client.username == "username"
         assert client.password == "password"
-        assert client.wsdl_file == "resources/API.wsdl"
+        assert client.wsdl_file == "tests/resources/API.wsdl"
         assert client.external_headers == {
             "version": 2.0,
             "languageCode": "en",

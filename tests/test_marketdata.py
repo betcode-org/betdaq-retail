@@ -11,7 +11,7 @@ from betdaq.endpoints.marketdata import MarketData
 class BettingTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password", "resources/API.wsdl")
+        client = APIClient("username", "password", "tests/resources/API.wsdl")
         self.market_data = MarketData(client)
 
     @mock.patch("betdaq.endpoints.marketdata.MarketData.process_response")

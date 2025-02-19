@@ -9,7 +9,7 @@ from betdaq.endpoints.account import Account
 class AccountTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password", "resources/API.wsdl")
+        client = APIClient("username", "password", "tests/resources/API.wsdl")
         self.account = Account(client)
 
     @mock.patch("betdaq.endpoints.account.Account.process_response")

@@ -10,7 +10,7 @@ from betdaq.endpoints.betting import Betting
 class BettingTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password", "resources/API.wsdl")
+        client = APIClient("username", "password", "tests/resources/API.wsdl")
         self.betting = Betting(client)
 
     @mock.patch("betdaq.endpoints.betting.Betting.process_response")

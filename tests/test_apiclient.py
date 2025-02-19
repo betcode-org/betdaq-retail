@@ -6,7 +6,7 @@ from betdaq.endpoints import Betting, Account, MarketData, Trading
 class APIClientTest(unittest.TestCase):
 
     def test_apiclient_init(self):
-        client = APIClient("username", "password", "resources/API.wsdl")
+        client = APIClient("username", "password", "tests/resources/API.wsdl")
         assert str(client) == "APIClient"
         assert repr(client) == "<APIClient [username]>"
         assert isinstance(client.betting, Betting)

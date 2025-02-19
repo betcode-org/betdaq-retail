@@ -9,7 +9,7 @@ from betdaq.endpoints.trading import Trading
 class BettingTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password", "resources/API.wsdl")
+        client = APIClient("username", "password", "tests/resources/API.wsdl")
         self.trading = Trading(client)
 
     @mock.patch("betdaq.endpoints.trading.Trading.process_response")
