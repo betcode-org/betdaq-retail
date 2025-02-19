@@ -33,7 +33,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 test = [
-    "black==24.8.0",
+    "black==25.1.0",
     "coverage",
     "build",
     "twine",
