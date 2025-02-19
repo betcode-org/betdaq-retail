@@ -4,4 +4,4 @@ from .filters import create_order, update_order
 
 
 __title__ = "betdaq"
-__version__ = "0.1.0"
+__version__ = "0.1.1"

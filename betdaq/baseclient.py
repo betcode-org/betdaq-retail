@@ -4,10 +4,10 @@ WSDL_FILE = "https://api.betdaq.com/v2.0/API.wsdl"
 
 
 class BaseClient:
-    def __init__(self, username, password, wsdl_file=WSDL_FILE):
+    def __init__(self, username, password, wsdl_file):
         self.username = username
         self.password = password
-        self.wsdl_file = wsdl_file
+        self.wsdl_file = wsdl_file or WSDL_FILE
         self.readonly_types = None
         self.secure_types = None
         self.secure_client, self.readonly_client = self.initialise_wsdl()
