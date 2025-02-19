@@ -1,17 +1,17 @@
+import unittest
 from unittest import mock
 from collections import OrderedDict
 from zeep.helpers import serialize_object
 
-from tests import BaseTestCase
 from betdaq.enums import Boolean, PriceFormat
 from betdaq.apiclient import APIClient
 from betdaq.endpoints.marketdata import MarketData
 
 
-class BettingTest(BaseTestCase):
+class BettingTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password")
+        client = APIClient("username", "password", "resources/API.wsdl")
         self.market_data = MarketData(client)
 
     @mock.patch("betdaq.endpoints.marketdata.MarketData.process_response")

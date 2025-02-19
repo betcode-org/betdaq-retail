@@ -1,12 +1,12 @@
-from tests import BaseTestCase
+import unittest
 from betdaq.apiclient import APIClient
 from betdaq.endpoints import Betting, Account, MarketData, Trading
 
 
-class APIClientTest(BaseTestCase):
+class APIClientTest(unittest.TestCase):
 
     def test_apiclient_init(self):
-        client = APIClient("username", "password")
+        client = APIClient("username", "password", "resources/API.wsdl")
         assert str(client) == "APIClient"
         assert repr(client) == "<APIClient [username]>"
         assert isinstance(client.betting, Betting)

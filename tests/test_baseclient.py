@@ -1,16 +1,18 @@
+import unittest
 from zeep import Client
 
-from tests import BaseTestCase
 from betdaq.baseclient import BaseClient
 
 
-class BaseClientTest(BaseTestCase):
+class BaseClientTest(unittest.TestCase):
 
     def test_baseclient_init(self):
-        client = BaseClient(username="username", password="password")
+        client = BaseClient(
+            username="username", password="password", wsdl_file="resources/API.wsdl"
+        )
         assert client.username == "username"
         assert client.password == "password"
-        assert client.wsdl_file == "https://api.betdaq.com/v2.0/API.wsdl"
+        assert client.wsdl_file == "resources/API.wsdl"
         assert client.external_headers == {
             "version": 2.0,
             "languageCode": "en",

@@ -1,15 +1,15 @@
 import datetime
+import unittest
 from unittest import mock
 
-from tests import BaseTestCase
 from betdaq.apiclient import APIClient
 from betdaq.endpoints.account import Account
 
 
-class AccountTest(BaseTestCase):
+class AccountTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password")
+        client = APIClient("username", "password", "resources/API.wsdl")
         self.account = Account(client)
 
     @mock.patch("betdaq.endpoints.account.Account.process_response")

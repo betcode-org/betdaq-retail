@@ -1,15 +1,15 @@
+import unittest
 from unittest import mock
 
-from tests import BaseTestCase
 from betdaq.apiclient import APIClient
 from betdaq.enums import HeartbeatAction
 from betdaq.endpoints.trading import Trading
 
 
-class BettingTest(BaseTestCase):
+class BettingTest(unittest.TestCase):
 
     def setUp(self):
-        client = APIClient("username", "password")
+        client = APIClient("username", "password", "resources/API.wsdl")
         self.trading = Trading(client)
 
     @mock.patch("betdaq.endpoints.trading.Trading.process_response")
