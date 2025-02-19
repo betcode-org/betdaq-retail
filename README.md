@@ -1,12 +1,12 @@
-# betdaq
-Python wrapper for Betdaq API.
+# betdaq-retail
+Python wrapper for BETDAQ Retail API.
 
 [Betdaq Documentation](http://api.betdaq.com/v2.0/Docs/default.aspx)
 
 # Installation
 
 ```
-$ pip install betdaq
+$ pip install betdaq-retail
 ```
 
 # Usage

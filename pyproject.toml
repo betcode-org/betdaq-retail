@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["betdaq"]
+
+[project]
+name = "betdaq-retail"
+description = "BETDAQ Retail API Python wrapper"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+authors = [
+    { name = "Rory Cole", email = "rory.cole1990@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "requests<2.33.0",
+    "python-dateutil>=2.6.0",
+    "zeep>=4.0.0",
+]
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "black==24.8.0",
+    "coverage",
+    "build",
+    "twine",
+]
+
+[project.urls]
+Homepage = "https://github.com/betcode-org"
+Documentation = "https://betcode-org.github.io/betdaq/"
+Repository = "https://github.com/betcode-org/betdaq-retail.git"
+"Bug Tracker" = "https://github.com/betcode-org/betdaq-retail/issues"
+Changelog = "https://github.com/betcode-org/betdaq-retail/blob/master/HISTORY.rst"
+
+[tool.hatch.version]
+path = "betdaq/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/betdaq",
+    "/HISTORY.rst",
+    "/README.md",
+    "/tests",
+]

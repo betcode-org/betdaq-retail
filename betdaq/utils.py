@@ -5,7 +5,7 @@ from betdaq.enums import ErrorMap
 
 
 def get_tag(elem):
-    return elem.tag.split('}')[-1]
+    return elem.tag.split("}")[-1]
 
 
 def get_attribs(elem):
@@ -20,10 +20,10 @@ def listy_mc_list(maybe_list):
 
 
 price_side_map = {
-    'ForSidePrices': 'back',
-    'AgainstSidePrices': 'lay',
-    1: 'back',
-    2: 'lay',
+    "ForSidePrices": "back",
+    "AgainstSidePrices": "lay",
+    1: "back",
+    2: "lay",
 }
 
 
@@ -35,13 +35,13 @@ def make_tz_naive(date):
     if isinstance(date, str):
         try:
             date = parse_time_str(date)
-            return date.strftime('%Y-%m-%d %H:%M:%S.%f')
+            return date.strftime("%Y-%m-%d %H:%M:%S.%f")
         except Exception:
             pass
     if isinstance(date, datetime):
         if date.tzinfo is not None:
             date = date.astimezone(timezone.utc).replace(tzinfo=None)
-        return date.strftime('%Y-%m-%d %H:%M:%S.%f')
+        return date.strftime("%Y-%m-%d %H:%M:%S.%f")
     return date
 
 
@@ -54,7 +54,7 @@ def clean_locals(params):
     :returns: cleaned locals dict to use as params for functions
     :rtype: dict
     """
-    return dict((k, v) for k, v in params.items() if v is not None and k != 'self')
+    return dict((k, v) for k, v in params.items() if v is not None and k != "self")
 
 
 def check_status_code(response, codes=None):
@@ -64,7 +64,7 @@ def check_status_code(response, codes=None):
     :raises: StatusCodeError if code invalid
     """
     codes = codes or [0]
-    response_code = response.get('ReturnStatus', {}).get('Code')
+    response_code = response.get("ReturnStatus", {}).get("Code")
     if response_code not in codes:
         raise eval(ErrorMap(response_code).name)
 
