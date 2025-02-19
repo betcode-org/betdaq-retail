@@ -1,10 +1,10 @@
-import unittest
 from zeep import Client
 
+from tests import BaseTestCase
 from betdaq.baseclient import BaseClient
 
 
-class BaseClientTest(unittest.TestCase):
+class BaseClientTest(BaseTestCase):
 
     def test_baseclient_init(self):
         client = BaseClient(username="username", password="password")

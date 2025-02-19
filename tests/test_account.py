@@ -1,12 +1,12 @@
 import datetime
-import unittest
-import unittest.mock as mock
+from unittest import mock
 
+from tests import BaseTestCase
 from betdaq.apiclient import APIClient
 from betdaq.endpoints.account import Account
 
 
-class AccountTest(unittest.TestCase):
+class AccountTest(BaseTestCase):
 
     def setUp(self):
         client = APIClient("username", "password")

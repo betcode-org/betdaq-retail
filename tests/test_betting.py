@@ -1,13 +1,13 @@
-import unittest
-import unittest.mock as mock
+from unittest import mock
 from zeep.helpers import serialize_object
 
+from tests import BaseTestCase
 from betdaq.enums import Boolean
 from betdaq.apiclient import APIClient
 from betdaq.endpoints.betting import Betting
 
 
-class BettingTest(unittest.TestCase):
+class BettingTest(BaseTestCase):
 
     def setUp(self):
         client = APIClient("username", "password")

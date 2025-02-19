@@ -1,12 +1,12 @@
-import unittest
-import unittest.mock as mock
+from unittest import mock
 
+from tests import BaseTestCase
 from betdaq.apiclient import APIClient
 from betdaq.enums import HeartbeatAction
 from betdaq.endpoints.trading import Trading
 
 
-class BettingTest(unittest.TestCase):
+class BettingTest(BaseTestCase):
 
     def setUp(self):
         client = APIClient("username", "password")

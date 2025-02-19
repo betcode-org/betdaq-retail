@@ -1,10 +1,9 @@
-import unittest
-
+from tests import BaseTestCase
 from betdaq.apiclient import APIClient
 from betdaq.endpoints import Betting, Account, MarketData, Trading
 
 
-class APIClientTest(unittest.TestCase):
+class APIClientTest(BaseTestCase):
 
     def test_apiclient_init(self):
         client = APIClient("username", "password")
