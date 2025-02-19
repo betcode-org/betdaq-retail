@@ -1,9 +1,11 @@
-
 import datetime
 
 from betdaq.utils import clean_locals
 from betdaq.endpoints.baseendpoint import BaseEndpoint
-from betdaq.resources.accountresources import parse_account_balance, parse_account_postings
+from betdaq.resources.accountresources import (
+    parse_account_balance,
+    parse_account_postings,
+)
 
 
 class Account(BaseEndpoint):
@@ -17,9 +19,9 @@ class Account(BaseEndpoint):
         """
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
-        response = self.request('GetAccountBalances', params, secure=True)
+        response = self.request("GetAccountBalances", params, secure=True)
         data = self.process_response(response, date_time_sent, None)
-        return parse_account_balance(data.get('data', {})) if data.get('data') else {}
+        return parse_account_balance(data.get("data", {})) if data.get("data") else {}
 
     def get_account_transactions(self, StartTime, EndTime):
         """
@@ -33,9 +35,9 @@ class Account(BaseEndpoint):
         """
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
-        response = self.request('ListAccountPostings', params, secure=True)
+        response = self.request("ListAccountPostings", params, secure=True)
         data = self.process_response(response, date_time_sent, None)
-        return parse_account_postings(data.get('data', {})) if data.get('data') else {}
+        return parse_account_postings(data.get("data", {})) if data.get("data") else {}
 
     def get_account_transactions_by_id(self, TransactionId):
         """
@@ -47,9 +49,9 @@ class Account(BaseEndpoint):
         """
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
-        response = self.request('ListAccountPostingsById', params, secure=True)
+        response = self.request("ListAccountPostingsById", params, secure=True)
         data = self.process_response(response, date_time_sent, None)
-        return parse_account_postings(data.get('data', {})) if data.get('data') else {}
+        return parse_account_postings(data.get("data", {})) if data.get("data") else {}
 
     def change_account_password(self, Password):
         """
@@ -61,6 +63,6 @@ class Account(BaseEndpoint):
         """
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
-        response = self.request('ChangePassword', params, secure=True)
+        response = self.request("ChangePassword", params, secure=True)
         data = self.process_response(response, date_time_sent, None)
-        return data.get('data', {})
+        return data.get("data", {})

@@ -1,15 +1,15 @@
-
 from enum import Enum
 
 
 class HeartbeatAction(Enum):
     """
     Action to be performed when a threshold period has expired without a Pulse having been received.
-    
+
     :var CancelOrders: cancel all unmatched orders.
     :var SuspendOrders: suspend all unmatched orders.
     :var SuspendPunter: suspend punter.
     """
+
     CancelOrders = 1
     SuspendOrders = 2
     SuspendPunter = 3
@@ -18,19 +18,20 @@ class HeartbeatAction(Enum):
 class OrderKillType(Enum):
     """
     Define how an order is handled when sent to exchange.
-    
-    :var FillAndKill: After the initial attempt is made to match this order any unmatched portion of the order is 
+
+    :var FillAndKill: After the initial attempt is made to match this order any unmatched portion of the order is
     immediately cancelled.
-    :var FillOrKill: On the initial attempt to match this order if it is not possible to match a specified amount of 
-    the order then none of the order will be matched. If it had been possible to match at least the specified amount 
+    :var FillOrKill: On the initial attempt to match this order if it is not possible to match a specified amount of
+    the order then none of the order will be matched. If it had been possible to match at least the specified amount
     then the amount that can be matched will be matched and the remaining unmatched amount will be cancelled.
-    :var FillOrKillDontCancel: On the initial attempt to match this order if it is not possible to match a specified 
-    mount of the order then none of the order will be matched. If it had been possible to match at least the specified 
-    amount then the amount that can be matched will be matched and the remaining unmatched amount will be not be 
+    :var FillOrKillDontCancel: On the initial attempt to match this order if it is not possible to match a specified
+    mount of the order then none of the order will be matched. If it had been possible to match at least the specified
+    amount then the amount that can be matched will be matched and the remaining unmatched amount will be not be
     cancelled but left as an unmatched order.
-    :var SPIfUnmatched: Same as Normal but any unmatched portion of the order is to be matched at SP when the market 
+    :var SPIfUnmatched: Same as Normal but any unmatched portion of the order is to be matched at SP when the market
     is turned in-running (or completed).
     """
+
     Normal = 1
     FillAndKill = 2
     FillOrKill = 3
@@ -41,15 +42,16 @@ class OrderKillType(Enum):
 class MarketStatus(Enum):
     """
     The current status of a market.
-    
+
     :var INACTIVEW: The Market is not active and has never had any Orders issued against it.
     :var ACTIVE: The Market it active (that is, Orders can be issued against it).
     :var SUSPENDED: The Market is not currently active but it has not yet been completed.
-    :var CLOSED: The Market is completed. No further Orders can be issued against the Market but the result of the 
+    :var CLOSED: The Market is completed. No further Orders can be issued against the Market but the result of the
     Market is either not yet known or has not yet been entered.
     :var SETTLED: The Market has been fully settled.
     :var VOIDED: The Market has been voided. All matched Orders in this Market have also been voided.
     """
+
     INACTIVE = 1
     ACTIVE = 2
     SUSPENDED = 3
@@ -62,6 +64,7 @@ class MarketType(Enum):
     """
     The type of a market.
     """
+
     Win = 1
     Place = 2
     MatchOdds = 3
@@ -127,6 +130,7 @@ class OrderActionType(Enum):
     """
     The type of an order history audit record.
     """
+
     Placed = 1
     ExplicitlyUpdated = 2
     Matched = 3
@@ -152,17 +156,18 @@ class OrderActionType(Enum):
 class OrderStatus(Enum):
     """
     The status of an order.
-    
+
     :var Unmatched: The order is active and has some amount available for matching (the order may be partially matched).
-    :var Matched: The order has not been settled and it does not have any unmatched amount. Either the order was fully 
+    :var Matched: The order has not been settled and it does not have any unmatched amount. Either the order was fully
     matched or it was partially matched and then cancelled.
-    :var Cancelled: This order has been cancelled and at least some of the order was unmatched at the time of 
+    :var Cancelled: This order has been cancelled and at least some of the order was unmatched at the time of
     expiration.
     :var Settled: The order has been settled.
     :var Voided: The order has been voided.
-    :var Suspended: At least some of this order is unmatched but the order is suspended and is not available 
+    :var Suspended: At least some of this order is unmatched but the order is suspended and is not available
     for matching.
     """
+
     Unmatched = 1
     Matched = 2
     Cancelled = 3
@@ -175,6 +180,7 @@ class Polarity(Enum):
     """
     The side which an order is being sent for.
     """
+
     back = 1
     lay = 2
 
@@ -182,12 +188,13 @@ class Polarity(Enum):
 class PostingCategory(Enum):
     """
     The categories of a posting.
-    
+
     :var Settlement: This posting resulted from the settlement, unsettlement or resettlement of a specific order.
-    :var Commission: This posting resulting from the charging of commission on market settlement, unsettlement or 
+    :var Commission: This posting resulting from the charging of commission on market settlement, unsettlement or
     resettlement.
-    :var Other: This posting resulted from any other cause (for example, a lodgement or withdrawal). 
+    :var Other: This posting resulted from any other cause (for example, a lodgement or withdrawal).
     """
+
     Settlement = 1
     Commission = 2
     Other = 3
@@ -197,6 +204,7 @@ class PunterCommissionBasis(Enum):
     """
     The basis on which commission for the punter is to be calculated.
     """
+
     NetMarketWinnings = 1
     MatchedForSideStakeExcludingPush = 2
     MatchedForSideStakeIncludingPush = 3
@@ -209,15 +217,16 @@ class PunterCommissionBasis(Enum):
 class PriceFormat(Enum):
     """
     The format of a price.
-    
-    :var Decimal: The price is expressed in decimal format – in particular the price is the decimal representation of 
+
+    :var Decimal: The price is expressed in decimal format – in particular the price is the decimal representation of
     the payout for 1 currency unit stake.
-    :var Fractional: The price is expressed in fractional format – in particular the fraction is the winnings 
+    :var Fractional: The price is expressed in fractional format – in particular the fraction is the winnings
     for 1 currency unit stake.
-    :var American: The price is expressed in American format – in particular if the price is greater than 0 it means 
-    the amount of winnings for 100 currency unit stake whereas if the price is less than zero it means the 
+    :var American: The price is expressed in American format – in particular if the price is greater than 0 it means
+    the amount of winnings for 100 currency unit stake whereas if the price is less than zero it means the
     amount of currency unit that needs to be staked to win 100 currency units.
     """
+
     Decimal = 1
     Fractional = 2
     American = 3
@@ -226,20 +235,21 @@ class PriceFormat(Enum):
 class SelectionStatus(Enum):
     """
     The current status of a Selection.
-    
+
     :var Inactive: The Selection is not active and has never had any Orders issued against it.
     :var Active: The Selection is active (that is, Orders can be issued against it).
     :var Suspended: Orders can not currently be placed on this Selection.
-    :var Withdrawn: The Entrant explicitly referenced by the Selection has withdrawn from the Event and so Orders 
+    :var Withdrawn: The Entrant explicitly referenced by the Selection has withdrawn from the Event and so Orders
     can no longer be placed on this Selection.
     :var BallotedOut: The Entrant explicitly referenced by the Selection has been balloted-out.
-    :var Voided: Orders can no longer be placed on this Selection and Orders previously placed for or against 
+    :var Voided: Orders can no longer be placed on this Selection and Orders previously placed for or against
     the Selection have been voided.
-    :var Completed: The Selection is completed. No further Orders can be issued against the Selection but the 
+    :var Completed: The Selection is completed. No further Orders can be issued against the Selection but the
     result of the Selection is either not yet known or has not yet been entered.
-    :var Settled: This Selection has already been settled. Individual selections can be settled in advance of 
+    :var Settled: This Selection has already been settled. Individual selections can be settled in advance of
     other selections in the market being settled (early settlement).
     """
+
     Inactive = 1
     Active = 2
     Suspended = 3
@@ -252,16 +262,17 @@ class SelectionStatus(Enum):
 
 class WithdrawRepriceOption(Enum):
     """
-    the action to take on a specific Order if a withdrawal occurs on the Market that could cause a 
-    Rule-4 deduction factor to be applied to the Order (this option only controls what happens to the 
-    unmatched parts of Orders, those parts that have already been matched will have the rule-4 deduction applied 
-    regardless of the value of this option). 
-    
-    :var Reprice: Reprice the unmatched parts of the Order. It is anticipated that this would be the 
+    the action to take on a specific Order if a withdrawal occurs on the Market that could cause a
+    Rule-4 deduction factor to be applied to the Order (this option only controls what happens to the
+    unmatched parts of Orders, those parts that have already been matched will have the rule-4 deduction applied
+    regardless of the value of this option).
+
+    :var Reprice: Reprice the unmatched parts of the Order. It is anticipated that this would be the
     usual option specified by Layers.
     :var Cancel: Cancel the unmatched parts of the Order.
     :var DontReprice: Do not reprice the unmatched parts of the Order.
     """
+
     Reprice = 1
     Cancel = 2
     DontReprice = 3
@@ -271,14 +282,16 @@ class Boolean(Enum):
     """
     Booleans must be send as lower case strings to soap requests.
     """
-    T = 'true'
-    F = 'false'
+
+    T = "true"
+    F = "false"
 
 
 class SportID(Enum):
     """
     Hard Code sports ID as endpoint is currently broken
     """
+
     HorseRacing = 100004
     Soccer = 100003
     GreyhoundRacing = 100008
@@ -303,6 +316,7 @@ class ErrorMap(Enum):
     """
     Map ReturnStatus Codes to their Specific Errors.
     """
+
     ResourceError = 1
     BetdaqSystemError = 2
     EventClassifierDoesNotExist = 5

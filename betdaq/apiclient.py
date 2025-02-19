@@ -13,7 +13,7 @@ class APIClient(BaseClient):
         self.trading = endpoints.Trading(self)
 
     def __repr__(self):
-        return '<APIClient [%s]>' % self.username
+        return "<APIClient [%s]>" % self.username
 
     def __str__(self):
-        return 'APIClient'
+        return "APIClient"
