@@ -442,7 +442,7 @@ class TradingCurrentlySuspendedOnMarket(BetdaqError):
         super(TradingCurrentlySuspendedOnMarket, self).__init__(message)
 
 
-class UnknownStatusCode(BetdaqError):
-    def __init__(self):
-        message = "Status code unknown."
+class UnknownStatusCode(BetdaqErrorMap):
+    def __init__(self, status_code):
+        message = "Status code %s unknown." % status_code
         super(UnknownStatusCode, self).__init__(message)
