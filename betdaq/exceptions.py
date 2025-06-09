@@ -1,4 +1,6 @@
-from enum import Enum
+import sys
+
+from betdaq.enums import ErrorMap
 
 
 class BetdaqError(Exception):
@@ -28,6 +30,16 @@ class APIError(BetdaqError):
         super(APIError, self).__init__(message)
 
 
+class BetdaqErrorMap(BetdaqError):
+    def __new__(cls, status_code, *args, **kwargs):
+        try:
+            exception_cls_name = ErrorMap(status_code).name
+            exception_cls = getattr(sys.modules[__name__], exception_cls_name)
+        except ValueError:
+            exception_cls = UnknownStatusCode
+        return super().__new__(exception_cls)
+
+
 class ResourceError(BetdaqError):
     def __init__(self):
         message = (
@@ -44,47 +56,40 @@ class BetdaqSystemError(BetdaqError):
 
 
 class EventClassifierDoesNotExist(BetdaqError):
-    def __init__(self, event):
-        message = "An Event Classifier with the handle %s does not exist." % event
+    def __init__(self):
+        message = "An Event Classifier does not exist."
         super(EventClassifierDoesNotExist, self).__init__(message)
 
 
 class MarketDoesNotExist(BetdaqError):
-    def __init__(self, market):
-        message = "A Market with the handle %s does not exist." % market
+    def __init__(self):
+        message = "Market does not exist."
         super(MarketDoesNotExist, self).__init__(message)
 
 
 class SelectionDoesNotExist(BetdaqError):
-    def __init__(self, selection):
-        message = "A selection with the handle %s does not exist." % selection
+    def __init__(self):
+        message = "Selection does not exist."
         super(SelectionDoesNotExist, self).__init__(message)
 
 
 class MarketNotActive(BetdaqError):
-    def __init__(self, market):
+    def __init__(self):
         message = (
-            "The action requested cannot be performed because the Market %s is not active."
-            % market
+            "The action requested cannot be performed because the Market is not active."
         )
         super(MarketNotActive, self).__init__(message)
 
 
 class MarketNeitherSuspendedNorActive(BetdaqError):
-    def __init__(self, market):
-        message = (
-            "The action requested cannot be performed because the Market %s is not active or suspended."
-            % market
-        )
+    def __init__(self):
+        message = "The action requested cannot be performed because the Market is not active or suspended."
         super(MarketNeitherSuspendedNorActive, self).__init__(message)
 
 
 class SelectionNotActive(BetdaqError):
-    def __init__(self, selection):
-        message = (
-            "The action requested cannot be performed because the selection %s is not active or suspended."
-            % selection
-        )
+    def __init__(self):
+        message = "The action requested cannot be performed because the selection is not active or suspended."
         super(SelectionNotActive, self).__init__(message)
 
 
@@ -99,58 +104,56 @@ class InsufficientVirtualPunterFunds(BetdaqError):
 
 
 class OrderDoesNotExist(BetdaqError):
-    def __init__(self, order_id):
-        message = "An Order with the handle %s does not exist." % order_id
+    def __init__(self):
+        message = "Order does not exist."
         super(OrderDoesNotExist, self).__init__(message)
 
 
 class NoUnmatchedAmount(BetdaqError):
-    def __init__(self, order_id):
+    def __init__(self):
         message = (
-            "The Order {} could not be placed, cancelled or changed because the amount "
-            "requested is negative or the entire stake of the Order has already been matched.".format(
-                order_id
-            )
+            "The Order could not be placed, cancelled or changed because the amount "
+            "requested is negative or the entire stake of the Order has already been matched."
         )
         super(NoUnmatchedAmount, self).__init__(message)
 
 
+class PunterReservationPerMarketExceeded(BetdaqError):
+    def __init__(self):
+        message = "Punter reservation per market exceeded"
+        super(PunterReservationPerMarketExceeded, self).__init__(message)
+
+
 class ResetHasOccurred(BetdaqError):
-    def __init__(self, order_id):
+    def __init__(self):
         message = (
-            "The order was not placed because the expectedSelectionResetCount {} on the Order does not match "
-            "the current selectionResetCount for the Selection.".format(order_id)
+            "The order was not placed because the expectedSelectionResetCount on the Order does not match "
+            "the current selectionResetCount for the Selection."
         )
         super(ResetHasOccurred, self).__init__(message)
 
 
 class OrderAlreadySuspended(BetdaqError):
-    def __init__(self, order_id):
-        message = "The order %s is already suspended" % order_id
+    def __init__(self):
+        message = "The order is already suspended"
         super(OrderAlreadySuspended, self).__init__(message)
 
 
 class TradingCurrentlySuspended(BetdaqError):
-    def __init__(self, order_id):
-        message = (
-            "The order %s could not be processed because all trading is currently suspended on the Exchange."
-            % order_id
-        )
+    def __init__(self):
+        message = "The order could not be processed because all trading is currently suspended on the Exchange."
         super(TradingCurrentlySuspended, self).__init__(message)
 
 
 class InvalidOdds(BetdaqError):
-    def __init__(self, odds, stake):
-        message = "The odds %s or stake %s are not valid." % (odds, stake)
+    def __init__(self):
+        message = "The odds are not valid."
         super(InvalidOdds, self).__init__(message)
 
 
 class WithdrawalSequenceNumberIsInvalid(BetdaqError):
-    def __init__(self, sequenceNumber):
-        message = (
-            "The Order was not placed because the withdrawal sequence number %s is greater than the current"
-            " withdrawal sequence number for the market." % sequenceNumber
-        )
+    def __init__(self):
+        message = "The Order was not placed because the withdrawal sequence number is invalid."
         super(WithdrawalSequenceNumberIsInvalid, self).__init__(message)
 
 
@@ -431,3 +434,15 @@ class InvalidUsername(BetdaqError):
     def __init__(self):
         message = "Username provided is not valid."
         super(InvalidUsername, self).__init__(message)
+
+
+class TradingCurrentlySuspendedOnMarket(BetdaqError):
+    def __init__(self):
+        message = "Trading is currently suspended on market."
+        super(TradingCurrentlySuspendedOnMarket, self).__init__(message)
+
+
+class UnknownStatusCode(BetdaqError):
+    def __init__(self):
+        message = "Status code unknown."
+        super(UnknownStatusCode, self).__init__(message)

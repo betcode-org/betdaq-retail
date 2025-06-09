@@ -1,7 +1,9 @@
 from datetime import datetime, timezone
 from decimal import Decimal
+
 from dateutil.parser import parse
-from betdaq.enums import ErrorMap
+
+from betdaq.exceptions import BetdaqErrorMap
 
 
 def get_tag(elem):
@@ -66,7 +68,7 @@ def check_status_code(response, codes=None):
     codes = codes or [0]
     response_code = response.get("ReturnStatus", {}).get("Code")
     if response_code not in codes:
-        raise eval(ErrorMap(response_code).name)
+        raise BetdaqErrorMap(response_code)
 
 
 def floatify(deci):

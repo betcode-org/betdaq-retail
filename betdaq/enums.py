@@ -328,6 +328,7 @@ class ErrorMap(Enum):
     InsufficientVirtualPunterFunds = 19
     OrderDoesNotExist = 21
     NoUnmatchedAmount = 22
+    PunterReservationPerMarketExceeded = 25
     ResetHasOccurred = 114
     OrderAlreadySuspended = 127
     TradingCurrentlySuspended = 128
@@ -372,3 +373,4 @@ class ErrorMap(Enum):
     MarketIsForPlayMoney = 598
     CannotChangeToSPIfUnmatched = 892
     InvalidUsername = 1000
+    TradingCurrentlySuspendedOnMarket = 1157
