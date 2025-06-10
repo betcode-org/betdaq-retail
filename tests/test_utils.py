@@ -22,7 +22,7 @@ class UtilsTest(unittest.TestCase):
             exceptions.InsufficientVirtualPunterFunds, utils.check_status_code, response
         )
 
-    def test_check_status_code_missing(self):
+    def test_check_status_code_map_missing(self):
         response = {"ReturnStatus": {"Code": 12345}}
         self.assertRaises(
             exceptions.UnknownStatusCode, utils.check_status_code, response
