@@ -137,7 +137,9 @@ def parse_market_prices(mkt):
             parse_runner_prices(runner) for runner in mkt.get("Selections", [])
         ],
         "is_play_market": mkt.get("IsPlayMarket"),
-        "status": MarketStatus(int(mkt.get("Status"))) if mkt.get("Status") else None,
+        "status": (
+            MarketStatus(int(mkt.get("Status"))).name if mkt.get("Status") else None
+        ),
         "number_of_winners": floatify(mkt.get("NumberOfWinningSelections")),
         "withdrawal_sequence_number": mkt.get("WithdrawalSequenceNumber"),
         "market_display_order": mkt.get("DisplayOrder"),
@@ -232,7 +234,7 @@ def parse_selection_changes(chg):
         "runner_display_order": chg.get("DisplayOrder"),
         "runner_hidden": chg.get("IsHidden"),
         "runner_status": (
-            SelectionStatus(int(chg.get("Status"))) if chg.get("Status") else None
+            SelectionStatus(int(chg.get("Status"))).name if chg.get("Status") else None
         ),
         "reset_count": chg.get("ResetCount"),
         "market_id": chg.get("MarketId"),
