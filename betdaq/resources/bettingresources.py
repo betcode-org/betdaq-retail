@@ -43,7 +43,7 @@ def parse_orders_receipt(order):
         "matched_lay_size": floatify(order.get("MatchedAgainstStake")),
         "sent_time": make_tz_naive(order.get("IssuedAt")),
         "status": (
-            OrderStatus(int(order.get("Status"))) if order.get("Status") else None
+            OrderStatus(int(order.get("Status"))).name if order.get("Status") else None
         ),
         "runner_sequence_number": order.get("SequenceNumber"),
         "runner_id": order.get("SelectionId"),
@@ -234,7 +234,9 @@ def parse_single_order(order):
         "matched_price": floatify(order.get("MatchedPrice")),
         "average_price": floatify(order.get("AveragePrice")),
         "matching_time": make_tz_naive(order.get("MatchingTimeStamp")),
-        "side": Polarity(int(order.get("Polarity"))) if order.get("Polarity") else None,
+        "side": (
+            Polarity(int(order.get("Polarity"))).name if order.get("Polarity") else None
+        ),
         "withdrawal_reprice_option": order.get("WithdrawalRepriceOption"),
         "cancel_on_in_running": order.get("CancelOnInRunning"),
         "cancel_if_selection_reset": order.get("CancelIfSelectionReset"),
